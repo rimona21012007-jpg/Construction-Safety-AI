@@ -1,0 +1,26 @@
+# Node
+node_modules/
+dist/
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.env
+
+# Project specific
+training/datasets/
+training/runs/
+runs/
+*.pt
+*.engine
+*.onnx
+
+# IDEs and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
