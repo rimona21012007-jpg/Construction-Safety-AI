@@ -60,11 +60,39 @@ function App() {
       {/* Main Content */}
       <main className="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
         {!result && !isLoading && (
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4 tracking-tight">AI-Powered Construction Site Safety</h2>
-            <p className="text-lg text-gray-600 mb-8">
-              Analyze construction-site images with computer vision to identify workers, equipment, and potential visual safety hazards.
+          <div className="text-center max-w-4xl mx-auto mb-16">
+            <h2 className="text-5xl font-extrabold text-gray-900 mb-6 tracking-tight">
+              AI-Powered Construction Safety Inspection
+            </h2>
+            <p className="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
+              Automated visual observation of construction site imagery to detect workers, equipment, and potential safety violations.
             </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+              <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm text-center">
+                <div className="text-3xl font-black text-gray-200 mb-2">01</div>
+                <h3 className="font-bold text-gray-900 mb-2">Upload</h3>
+                <p className="text-sm text-gray-600">Securely upload high-resolution construction site imagery.</p>
+              </div>
+              <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm text-center">
+                <div className="text-3xl font-black text-gray-200 mb-2">02</div>
+                <h3 className="font-bold text-gray-900 mb-2">Analyze</h3>
+                <p className="text-sm text-gray-600">Computer vision models instantly process the visual data.</p>
+              </div>
+              <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm text-center">
+                <div className="text-3xl font-black text-gray-200 mb-2">03</div>
+                <h3 className="font-bold text-gray-900 mb-2">Review</h3>
+                <p className="text-sm text-gray-600">Examine the AI-assisted safety observations and bounding boxes.</p>
+              </div>
+            </div>
+            
+            <div className="flex justify-center gap-4 text-sm font-medium text-gray-500 mb-4">
+              <span>✓ PPE Detection (Upcoming)</span>
+              <span>•</span>
+              <span>✓ Safety Violations</span>
+              <span>•</span>
+              <span>✓ Visual Evidence</span>
+            </div>
           </div>
         )}
 
@@ -91,28 +119,71 @@ function App() {
         {/* Result Section */}
         {result && imageUrl && !isLoading && (
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-bold text-gray-900">Inspection Report</h2>
-              <div className="flex gap-4">
-                <button 
-                  onClick={() => setShowDetections(!showDetections)}
-                  className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
-                >
-                  {showDetections ? 'Hide Detections' : 'Show Detections'}
-                </button>
-                <button 
-                  onClick={() => {
-                    setResult(null);
-                    setImageUrl(null);
-                  }}
-                  className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
-                >
-                  New Inspection
-                </button>
+            {/* Professional Report Header */}
+            <div className="bg-white border-b-2 border-gray-900 pb-6 mb-8 print:border-b-4">
+              <div className="flex justify-between items-start mb-6 print:mb-4">
+                <div>
+                  <h2 className="text-3xl font-black text-gray-900 tracking-tight uppercase">Inspection Report</h2>
+                  <p className="text-sm text-gray-500 font-medium mt-1">AI-Assisted Construction Safety Analysis</p>
+                </div>
+                <div className="flex gap-3 print:hidden">
+                  <button 
+                    onClick={() => window.print()}
+                    className="px-4 py-2 text-sm font-bold text-gray-700 bg-white border-2 border-gray-300 hover:border-gray-900 hover:text-gray-900 transition-colors"
+                  >
+                    Export Report
+                  </button>
+                  <button 
+                    onClick={() => {
+                      setResult(null);
+                      setImageUrl(null);
+                    }}
+                    className="px-4 py-2 text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 transition-colors shadow-sm"
+                  >
+                    New Inspection
+                  </button>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                <div>
+                  <span className="block text-gray-500 text-xs uppercase tracking-wider font-bold mb-1">Date / Time</span>
+                  <span className="font-mono text-gray-900">{new Date().toLocaleString()}</span>
+                </div>
+                <div>
+                  <span className="block text-gray-500 text-xs uppercase tracking-wider font-bold mb-1">Status</span>
+                  <span className="font-mono text-gray-900">{result.status.toUpperCase()}</span>
+                </div>
+                <div>
+                  <span className="block text-gray-500 text-xs uppercase tracking-wider font-bold mb-1">Processing Time</span>
+                  <span className="font-mono text-gray-900">{result.processing_time_ms} ms</span>
+                </div>
+                <div>
+                  <span className="block text-gray-500 text-xs uppercase tracking-wider font-bold mb-1">Model Version</span>
+                  <span className="font-mono text-gray-900">{result.model}</span>
+                </div>
               </div>
             </div>
 
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 text-center">
+            <div className="bg-white p-4 rounded-none shadow-sm border border-gray-200 text-center mb-8">
+              <div className="flex justify-between items-center mb-4 print:hidden">
+                <h3 className="font-bold text-gray-900 uppercase tracking-wide text-sm">Visual Evidence</h3>
+                <div className="flex bg-gray-100 p-1 rounded-md">
+                  <button 
+                    onClick={() => setShowDetections(false)}
+                    className={`px-3 py-1.5 text-xs font-bold uppercase transition-colors rounded-sm ${!showDetections ? 'bg-white shadow-sm text-gray-900' : 'text-gray-500 hover:text-gray-900'}`}
+                  >
+                    Original
+                  </button>
+                  <button 
+                    onClick={() => setShowDetections(true)}
+                    className={`px-3 py-1.5 text-xs font-bold uppercase transition-colors rounded-sm ${showDetections ? 'bg-white shadow-sm text-gray-900' : 'text-gray-500 hover:text-gray-900'}`}
+                  >
+                    Detections
+                  </button>
+                </div>
+              </div>
+              
               <DetectionOverlay 
                 imageUrl={imageUrl} 
                 detections={result.detections} 
