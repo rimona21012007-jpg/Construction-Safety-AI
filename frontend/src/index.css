@@ -2,6 +2,32 @@
 
 @layer base {
   body {
-    @apply bg-gray-50 text-gray-900 font-sans antialiased;
+    @apply text-white font-sans antialiased min-h-screen m-0;
+    /* Animated deep fluid mesh gradient */
+    background: linear-gradient(-45deg, #020617, #1e1b4b, #0f172a, #312e81);
+    background-size: 400% 400%;
+    animation: gradientFlow 15s ease infinite;
+  }
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@layer components {
+  /* Reusable glassmorphism card component */
+  .glass-panel {
+    @apply bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl shadow-black/50 rounded-2xl transition-all duration-300;
+  }
+  
+  .glass-panel:hover {
+    @apply bg-white/15 border-white/30;
+  }
+
+  /* Reusable glass input component */
+  .glass-input {
+    @apply bg-black/20 border border-white/10 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 backdrop-blur-md rounded-xl transition-all;
   }
 }

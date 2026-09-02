@@ -31,24 +31,24 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({ onAnalyze, isLoading }
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto p-6 bg-white rounded-xl shadow-sm border border-gray-200">
+    <div className="w-full max-w-2xl mx-auto glass-panel p-6">
       <div 
-        className={`relative border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
-          previewUrl ? 'border-gray-300' : 'border-blue-300 hover:border-blue-400 bg-blue-50/50'
+        className={`relative border-2 border-dashed rounded-xl p-8 text-center transition-all duration-300 ${
+          previewUrl ? 'border-white/20 bg-black/20' : 'border-cyan-400/50 hover:border-cyan-300 bg-blue-900/20 hover:bg-blue-900/40 backdrop-blur-md'
         }`}
         onDragOver={(e) => e.preventDefault()}
         onDrop={handleDrop}
       >
         {previewUrl ? (
-          <div className="relative">
-            <img src={previewUrl} alt="Preview" className="max-h-64 mx-auto rounded-md" />
-            <div className="mt-4 flex justify-center gap-4">
+          <div className="relative animate-in fade-in zoom-in-95 duration-300">
+            <img src={previewUrl} alt="Preview" className="max-h-64 mx-auto rounded-lg shadow-2xl border border-white/10" />
+            <div className="mt-6 flex justify-center gap-4">
               <button 
                 onClick={() => {
                   setSelectedFile(null);
                   setPreviewUrl(null);
                 }}
-                className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
+                className="px-4 py-2 text-sm font-bold text-white bg-white/10 border border-white/20 rounded-md hover:bg-white/20 transition-all backdrop-blur-sm"
                 disabled={isLoading}
               >
                 Remove Image
@@ -56,18 +56,22 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({ onAnalyze, isLoading }
               <button
                 onClick={() => selectedFile && onAnalyze(selectedFile)}
                 disabled={isLoading}
-                className="px-6 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 disabled:opacity-50"
+                className="px-8 py-2 text-sm font-bold text-gray-900 bg-cyan-400 rounded-md hover:bg-cyan-300 transition-all shadow-[0_0_15px_rgba(34,211,238,0.5)] disabled:opacity-50 disabled:shadow-none"
               >
                 {isLoading ? 'Analyzing image...' : 'Analyze Site'}
               </button>
             </div>
           </div>
         ) : (
-          <div className="py-12 cursor-pointer" onClick={() => fileInputRef.current?.click()}>
-            <UploadCloud className="w-12 h-12 mx-auto text-blue-500 mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">Drag and drop site image</h3>
-            <p className="text-sm text-gray-500 mb-4">or click to browse from your computer</p>
-            <p className="text-xs text-gray-400">Supported formats: JPEG, PNG</p>
+          <div className="py-12 cursor-pointer group" onClick={() => fileInputRef.current?.click()}>
+            <div className="w-20 h-20 mx-auto bg-cyan-500/10 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-cyan-500/20 transition-all duration-500">
+              <UploadCloud className="w-10 h-10 text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.8)]" />
+            </div>
+            <h3 className="text-xl font-medium text-white mb-2 tracking-wide">Drag and drop site image</h3>
+            <p className="text-sm text-blue-100/60 mb-4 font-light">or click to browse from your computer</p>
+            <div className="inline-block px-3 py-1 bg-black/30 rounded-full border border-white/5">
+              <p className="text-xs text-cyan-200/50 uppercase tracking-widest font-bold">Supported formats: JPEG, PNG</p>
+            </div>
           </div>
         )}
         <input 
