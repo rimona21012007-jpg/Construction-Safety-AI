@@ -37,7 +37,7 @@ function App() {
   return (
     <div className="min-h-screen bg-slate-50 relative flex flex-col items-center p-8 overflow-hidden">
       <div className="absolute inset-0 z-0">
-        <GradientWave colors={["#bfdbfe", "#dbeafe", "#e0f2fe", "#eff6ff", "#dbeafe", "#bfdbfe"]} />
+        <GradientWave colors={["#38bdf8", "#0ea5e9", "#7dd3fc", "#0284c7", "#38bdf8", "#7dd3fc"]} />
       </div>
       
       <div className="z-10 w-full max-w-5xl flex flex-col items-center">
