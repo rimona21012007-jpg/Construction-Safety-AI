@@ -73,32 +73,38 @@ function App() {
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
           {!result && !isLoading && (
             <div className="text-center max-w-4xl mx-auto mb-16 animate-in slide-in-from-bottom-8 duration-700">
-              <h2 className="text-5xl font-black text-gray-900 mb-6 tracking-tight drop-shadow-sm">
+              <h2 className="text-5xl font-black text-slate-900 mb-6 tracking-tight drop-shadow-sm">
                 AI-Powered Construction Safety Inspection
               </h2>
-              <p className="text-xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+              <p className="text-xl text-slate-700 font-medium mb-10 max-w-2xl mx-auto leading-relaxed">
                 Automated visual observation of construction site imagery to detect workers, equipment, and potential safety violations.
               </p>
             
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-                <div className="bg-white/40 backdrop-blur-lg border border-white/60 p-8 text-center group hover:-translate-y-2 hover:bg-white/60 shadow-[0_8px_32px_0_rgba(31,38,135,0.05)] hover:shadow-[0_16px_48px_0_rgba(31,38,135,0.1)] transition-all duration-500 rounded-2xl">
-                  <div className="text-5xl font-black text-gray-200/50 mb-6 group-hover:text-blue-500/20 transition-colors duration-500">01</div>
-                  <h3 className="font-bold text-gray-900 mb-3 tracking-wide text-lg">Upload</h3>
-                  <p className="text-sm text-gray-600 font-medium leading-relaxed">Securely upload high-resolution construction site imagery.</p>
+                <div className="bg-white/50 backdrop-blur-md border border-white/60 p-8 text-center group hover:-translate-y-2 hover:bg-white/70 shadow-[0_8px_32px_0_rgba(31,38,135,0.05)] hover:shadow-[0_16px_48px_0_rgba(31,38,135,0.1)] transition-all duration-500 rounded-2xl relative overflow-hidden">
+                  <div className="absolute -right-4 -top-6 text-9xl font-black text-white/40 group-hover:text-white/60 transition-colors duration-500 z-0 select-none">1</div>
+                  <div className="relative z-10">
+                    <h3 className="font-extrabold text-slate-900 mb-3 tracking-wide text-xl">Upload</h3>
+                    <p className="text-sm text-slate-700 font-semibold leading-relaxed">Securely upload high-resolution construction site imagery.</p>
+                  </div>
                 </div>
-                <div className="bg-white/40 backdrop-blur-lg border border-white/60 p-8 text-center group hover:-translate-y-2 hover:bg-white/60 delay-75 shadow-[0_8px_32px_0_rgba(31,38,135,0.05)] hover:shadow-[0_16px_48px_0_rgba(31,38,135,0.1)] transition-all duration-500 rounded-2xl">
-                  <div className="text-5xl font-black text-gray-200/50 mb-6 group-hover:text-blue-500/20 transition-colors duration-500">02</div>
-                  <h3 className="font-bold text-gray-900 mb-3 tracking-wide text-lg">Analyze</h3>
-                  <p className="text-sm text-gray-600 font-medium leading-relaxed">Computer vision models instantly process the visual data.</p>
+                <div className="bg-white/50 backdrop-blur-md border border-white/60 p-8 text-center group hover:-translate-y-2 hover:bg-white/70 delay-75 shadow-[0_8px_32px_0_rgba(31,38,135,0.05)] hover:shadow-[0_16px_48px_0_rgba(31,38,135,0.1)] transition-all duration-500 rounded-2xl relative overflow-hidden">
+                  <div className="absolute -right-4 -top-6 text-9xl font-black text-white/40 group-hover:text-white/60 transition-colors duration-500 z-0 select-none">2</div>
+                  <div className="relative z-10">
+                    <h3 className="font-extrabold text-slate-900 mb-3 tracking-wide text-xl">Analyze</h3>
+                    <p className="text-sm text-slate-700 font-semibold leading-relaxed">Computer vision models instantly process the visual data.</p>
+                  </div>
                 </div>
-                <div className="bg-white/40 backdrop-blur-lg border border-white/60 p-8 text-center group hover:-translate-y-2 hover:bg-white/60 delay-150 shadow-[0_8px_32px_0_rgba(31,38,135,0.05)] hover:shadow-[0_16px_48px_0_rgba(31,38,135,0.1)] transition-all duration-500 rounded-2xl">
-                  <div className="text-5xl font-black text-gray-200/50 mb-6 group-hover:text-blue-500/20 transition-colors duration-500">03</div>
-                  <h3 className="font-bold text-gray-900 mb-3 tracking-wide text-lg">Review</h3>
-                  <p className="text-sm text-gray-600 font-medium leading-relaxed">Examine the AI-assisted safety observations and bounding boxes.</p>
+                <div className="bg-white/50 backdrop-blur-md border border-white/60 p-8 text-center group hover:-translate-y-2 hover:bg-white/70 delay-150 shadow-[0_8px_32px_0_rgba(31,38,135,0.05)] hover:shadow-[0_16px_48px_0_rgba(31,38,135,0.1)] transition-all duration-500 rounded-2xl relative overflow-hidden">
+                  <div className="absolute -right-4 -top-6 text-9xl font-black text-white/40 group-hover:text-white/60 transition-colors duration-500 z-0 select-none">3</div>
+                  <div className="relative z-10">
+                    <h3 className="font-extrabold text-slate-900 mb-3 tracking-wide text-xl">Review</h3>
+                    <p className="text-sm text-slate-700 font-semibold leading-relaxed">Examine the AI-assisted safety observations and bounding boxes.</p>
+                  </div>
                 </div>
               </div>
               
-              <div className="flex justify-center gap-4 text-sm font-medium text-gray-400 mb-4 tracking-widest uppercase">
+              <div className="flex justify-center gap-4 text-sm font-bold text-blue-900/60 mb-4 tracking-widest uppercase drop-shadow-sm">
                 <span>✓ PPE Detection</span>
                 <span>•</span>
                 <span>✓ Safety Violations</span>
