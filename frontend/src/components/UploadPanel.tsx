@@ -31,24 +31,25 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({ onAnalyze, isLoading }
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto p-6 bg-white rounded-xl shadow-sm border border-gray-200">
+    <div className="w-full max-w-2xl mx-auto p-1 bg-white/20 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/30 relative overflow-hidden group">
+      <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/10 to-blue-500/10 opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
       <div 
-        className={`relative border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
-          previewUrl ? 'border-gray-300' : 'border-blue-300 hover:border-blue-400 bg-blue-50/50'
+        className={`relative z-10 border-2 border-dashed rounded-xl p-8 text-center transition-all duration-500 bg-white/60 backdrop-blur-md ${
+          previewUrl ? 'border-cyan-300 shadow-[inset_0_0_20px_rgba(34,211,238,0.1)]' : 'border-cyan-300/50 hover:border-cyan-400 hover:shadow-[0_0_30px_rgba(34,211,238,0.2)]'
         }`}
         onDragOver={(e) => e.preventDefault()}
         onDrop={handleDrop}
       >
         {previewUrl ? (
           <div className="relative">
-            <img src={previewUrl} alt="Preview" className="max-h-64 mx-auto rounded-md" />
-            <div className="mt-4 flex justify-center gap-4">
+            <img src={previewUrl} alt="Preview" className="max-h-64 mx-auto rounded-lg shadow-lg ring-1 ring-black/5" />
+            <div className="mt-6 flex justify-center gap-4">
               <button 
                 onClick={() => {
                   setSelectedFile(null);
                   setPreviewUrl(null);
                 }}
-                className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
+                className="px-6 py-2 text-sm font-bold text-gray-700 bg-white border border-gray-200 rounded-md hover:bg-gray-50 hover:border-gray-300 transition-all shadow-sm"
                 disabled={isLoading}
               >
                 Remove Image
@@ -56,18 +57,22 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({ onAnalyze, isLoading }
               <button
                 onClick={() => selectedFile && onAnalyze(selectedFile)}
                 disabled={isLoading}
-                className="px-6 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 disabled:opacity-50"
+                className="px-8 py-2 text-sm font-bold text-gray-900 bg-cyan-400 rounded-md hover:bg-cyan-300 transition-all shadow-[0_0_15px_rgba(34,211,238,0.5)] disabled:opacity-50 disabled:shadow-none"
               >
                 {isLoading ? 'Analyzing image...' : 'Analyze Site'}
               </button>
             </div>
           </div>
         ) : (
-          <div className="py-12 cursor-pointer" onClick={() => fileInputRef.current?.click()}>
-            <UploadCloud className="w-12 h-12 mx-auto text-blue-500 mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">Drag and drop site image</h3>
-            <p className="text-sm text-gray-500 mb-4">or click to browse from your computer</p>
-            <p className="text-xs text-gray-400">Supported formats: JPEG, PNG</p>
+          <div className="py-12 cursor-pointer group/inner" onClick={() => fileInputRef.current?.click()}>
+            <div className="w-20 h-20 mx-auto bg-cyan-500/10 rounded-full flex items-center justify-center mb-6 group-hover/inner:scale-110 group-hover/inner:bg-cyan-500/20 transition-all duration-500">
+              <UploadCloud className="w-10 h-10 text-cyan-500 drop-shadow-sm" />
+            </div>
+            <h3 className="text-xl font-bold text-gray-900 mb-2 tracking-tight">Drag and drop site image</h3>
+            <p className="text-sm text-gray-600 mb-6 font-medium">or click to browse from your computer</p>
+            <div className="inline-block px-4 py-1.5 bg-gray-100 rounded-full border border-gray-200 shadow-sm">
+              <p className="text-xs text-gray-500 font-bold tracking-widest uppercase">Supported formats: JPEG, PNG</p>
+            </div>
           </div>
         )}
         <input 

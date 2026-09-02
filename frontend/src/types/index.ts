@@ -25,12 +25,34 @@ export interface InspectionSummary {
   equipment_detected: number;
 }
 
+export interface WorkerPpeStatus {
+  status: "COMPLIANT" | "VIOLATION" | "UNKNOWN";
+  confidence: number;
+  class: string | null;
+}
+
+export interface WorkerResult {
+  id: string;
+  bbox: number[];
+  confidence: number;
+  ppe: {
+    helmet: WorkerPpeStatus;
+    vest: WorkerPpeStatus;
+    gloves: WorkerPpeStatus;
+    boots: WorkerPpeStatus;
+    goggles: WorkerPpeStatus;
+  };
+  violations: string[];
+  score: number | null;
+}
+
 export interface InspectionResponse {
   inspection_id: string;
-  status: "compliant" | "warning";
-  safety_score: number;
+  status: "compliant" | "warning" | "inconclusive";
+  safety_score: number | null;
   summary: InspectionSummary;
-  equipment_detected: Record<string, number>;
+  workers?: WorkerResult[];
+  equipment: Record<string, number>;
   detections: Detection[];
   violations: Violation[];
   processing_time_ms: number;

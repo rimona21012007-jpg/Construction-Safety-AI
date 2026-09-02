@@ -5,7 +5,7 @@ import { DetectionOverlay } from './components/DetectionOverlay';
 import { InspectionDashboard } from './components/InspectionDashboard';
 import { inspectImage, getModelInfo } from './services/api';
 import type { InspectionResponse } from './types';
-import { InfiniteGrid } from './components/ui/the-infinite-grid';
+import { GradientWave } from "./components/ui/gradient-wave";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
@@ -35,10 +35,15 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col font-sans relative overflow-hidden bg-white">
+    <div className="min-h-screen bg-slate-50 relative flex flex-col items-center p-8 overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <GradientWave colors={["#e0f2fe", "#f0fdfa", "#e0f2fe", "#ffffff", "#f0fdfa", "#ffffff"]} />
+      </div>
+      
+      <div className="z-10 w-full max-w-5xl flex flex-col items-center">
       {/* Header */}
-      <header className="sticky top-0 z-20 bg-white/90 backdrop-blur-md border-b border-gray-200 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <header className="w-full mb-12 bg-white/90 backdrop-blur-md border border-gray-200 shadow-sm rounded-2xl">
+        <div className="px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="relative flex items-center justify-center">
               <Hexagon className="w-10 h-10 text-blue-600 opacity-90" strokeWidth={1.5} />
@@ -64,7 +69,7 @@ function App() {
       </header>
 
       {/* Main Content wrapped in InfiniteGrid */}
-      <InfiniteGrid className="flex-grow py-12">
+      <div className="flex-grow py-12 w-full">
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
           {!result && !isLoading && (
             <div className="text-center max-w-4xl mx-auto mb-16 animate-in slide-in-from-bottom-8 duration-700">
@@ -94,7 +99,7 @@ function App() {
               </div>
               
               <div className="flex justify-center gap-4 text-sm font-medium text-gray-400 mb-4 tracking-widest uppercase">
-                <span>✓ PPE Detection (Upcoming)</span>
+                <span>✓ PPE Detection</span>
                 <span>•</span>
                 <span>✓ Safety Violations</span>
                 <span>•</span>
@@ -163,7 +168,7 @@ function App() {
                   </div>
                   <div>
                     <span className="block text-gray-400 text-xs uppercase tracking-widest font-bold mb-1 print:text-gray-500">Status</span>
-                    <span className={`font-mono font-bold ${result.status === 'compliant' ? 'text-green-600' : 'text-red-600'} print:text-black`}>{result.status.toUpperCase()}</span>
+                    <span className={`font-mono font-bold ${result.status === 'compliant' ? 'text-green-600' : (result.status === 'inconclusive' ? 'text-gray-500' : 'text-red-600')} print:text-black`}>{result.status.toUpperCase()}</span>
                   </div>
                   <div>
                     <span className="block text-gray-400 text-xs uppercase tracking-widest font-bold mb-1 print:text-gray-500">Processing Time</span>
@@ -210,15 +215,16 @@ function App() {
                   <ShieldCheck className="w-5 h-5 flex-shrink-0 text-blue-500" />
                   <div>
                     <strong className="block text-gray-900 mb-1 tracking-wider uppercase">AI-Assisted Visual Safety Inspection</strong>
-                    <p className="mb-2">This is an automated visual observation prototype (processed in {result.processing_time_ms}ms using {result.model}). It does not replace professional safety engineers and does not provide legally valid safety certification.</p>
-                    <p>Confidence represents the model's certainty for an individual detection, not overall precision. Construction-specific PPE analysis requires a custom-trained model.</p>
+                    <p className="mb-2">AI-assisted inspection — prototype. Results require human verification and are not a substitute for certified safety inspection. This is an automated visual observation prototype (processed in {result.processing_time_ms}ms using {result.model}).</p>
+                    <p>Confidence represents the model's certainty for an individual detection, not overall precision.</p>
                   </div>
                 </div>
               </div>
             </div>
           )}
         </main>
-      </InfiniteGrid>
+      </div>
+      </div>
     </div>
   );
 }
