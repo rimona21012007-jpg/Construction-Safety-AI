@@ -42,7 +42,7 @@ function App() {
       
       <div className="z-10 w-full max-w-5xl flex flex-col items-center">
       {/* Header */}
-      <header className="w-full mb-12 bg-white/40 backdrop-blur-xl border border-white/60 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] rounded-2xl">
+      <header className="w-full mb-12 bg-white shadow-md border border-gray-100 rounded-2xl">
         <div className="px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="relative flex items-center justify-center">
@@ -81,25 +81,25 @@ function App() {
               </p>
             
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-                <div className="bg-white/50 backdrop-blur-md border border-white/60 p-8 text-center group hover:-translate-y-2 hover:bg-white/70 shadow-[0_8px_32px_0_rgba(31,38,135,0.05)] hover:shadow-[0_16px_48px_0_rgba(31,38,135,0.1)] transition-all duration-500 rounded-2xl relative overflow-hidden">
-                  <div className="absolute -right-4 -top-6 text-9xl font-black text-white/40 group-hover:text-white/60 transition-colors duration-500 z-0 select-none">1</div>
+                <div className="bg-white border border-gray-100 p-8 text-center group hover:-translate-y-2 shadow-sm hover:shadow-lg transition-all duration-500 rounded-2xl relative overflow-hidden">
+                  <div className="absolute -right-4 -top-6 text-9xl font-black text-gray-100 group-hover:text-blue-50 transition-colors duration-500 z-0 select-none">1</div>
                   <div className="relative z-10">
                     <h3 className="font-extrabold text-slate-900 mb-3 tracking-wide text-xl">Upload</h3>
-                    <p className="text-sm text-slate-700 font-semibold leading-relaxed">Securely upload high-resolution construction site imagery.</p>
+                    <p className="text-sm text-slate-600 font-semibold leading-relaxed">Securely upload high-resolution construction site imagery.</p>
                   </div>
                 </div>
-                <div className="bg-white/50 backdrop-blur-md border border-white/60 p-8 text-center group hover:-translate-y-2 hover:bg-white/70 delay-75 shadow-[0_8px_32px_0_rgba(31,38,135,0.05)] hover:shadow-[0_16px_48px_0_rgba(31,38,135,0.1)] transition-all duration-500 rounded-2xl relative overflow-hidden">
-                  <div className="absolute -right-4 -top-6 text-9xl font-black text-white/40 group-hover:text-white/60 transition-colors duration-500 z-0 select-none">2</div>
+                <div className="bg-white border border-gray-100 p-8 text-center group hover:-translate-y-2 delay-75 shadow-sm hover:shadow-lg transition-all duration-500 rounded-2xl relative overflow-hidden">
+                  <div className="absolute -right-4 -top-6 text-9xl font-black text-gray-100 group-hover:text-blue-50 transition-colors duration-500 z-0 select-none">2</div>
                   <div className="relative z-10">
                     <h3 className="font-extrabold text-slate-900 mb-3 tracking-wide text-xl">Analyze</h3>
-                    <p className="text-sm text-slate-700 font-semibold leading-relaxed">Computer vision models instantly process the visual data.</p>
+                    <p className="text-sm text-slate-600 font-semibold leading-relaxed">Computer vision models instantly process the visual data.</p>
                   </div>
                 </div>
-                <div className="bg-white/50 backdrop-blur-md border border-white/60 p-8 text-center group hover:-translate-y-2 hover:bg-white/70 delay-150 shadow-[0_8px_32px_0_rgba(31,38,135,0.05)] hover:shadow-[0_16px_48px_0_rgba(31,38,135,0.1)] transition-all duration-500 rounded-2xl relative overflow-hidden">
-                  <div className="absolute -right-4 -top-6 text-9xl font-black text-white/40 group-hover:text-white/60 transition-colors duration-500 z-0 select-none">3</div>
+                <div className="bg-white border border-gray-100 p-8 text-center group hover:-translate-y-2 delay-150 shadow-sm hover:shadow-lg transition-all duration-500 rounded-2xl relative overflow-hidden">
+                  <div className="absolute -right-4 -top-6 text-9xl font-black text-gray-100 group-hover:text-blue-50 transition-colors duration-500 z-0 select-none">3</div>
                   <div className="relative z-10">
                     <h3 className="font-extrabold text-slate-900 mb-3 tracking-wide text-xl">Review</h3>
-                    <p className="text-sm text-slate-700 font-semibold leading-relaxed">Examine the AI-assisted safety observations and bounding boxes.</p>
+                    <p className="text-sm text-slate-600 font-semibold leading-relaxed">Examine the AI-assisted safety observations and bounding boxes.</p>
                   </div>
                 </div>
               </div>

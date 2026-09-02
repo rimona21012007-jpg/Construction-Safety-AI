@@ -31,11 +31,11 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({ onAnalyze, isLoading }
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto p-1 bg-white/20 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/30 relative overflow-hidden group">
-      <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/10 to-blue-500/10 opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
+    <div className="w-full max-w-2xl mx-auto p-1.5 bg-white rounded-2xl shadow-md border border-gray-100 relative overflow-hidden group">
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-cyan-50 opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
       <div 
-        className={`relative z-10 border-2 border-dashed rounded-xl p-8 text-center transition-all duration-500 bg-white/60 backdrop-blur-md ${
-          previewUrl ? 'border-cyan-300 shadow-[inset_0_0_20px_rgba(34,211,238,0.1)]' : 'border-cyan-300/50 hover:border-cyan-400 hover:shadow-[0_0_30px_rgba(34,211,238,0.2)]'
+        className={`relative z-10 border-2 border-dashed rounded-xl p-8 text-center transition-all duration-500 bg-white ${
+          previewUrl ? 'border-cyan-400 shadow-[inset_0_0_15px_rgba(34,211,238,0.05)]' : 'border-gray-300 hover:border-cyan-400'
         }`}
         onDragOver={(e) => e.preventDefault()}
         onDrop={handleDrop}
