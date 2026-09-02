@@ -13,12 +13,12 @@ export const InspectionDashboard: React.FC<InspectionDashboardProps> = ({ data }
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
       {/* Safety Score Card */}
-      <div className="glass-panel p-6 col-span-1 border border-white/20">
-        <h3 className="text-sm font-bold text-white uppercase tracking-widest mb-6 border-b border-white/10 pb-2">Overall Assessment</h3>
+      <div className="bg-white p-6 rounded-none shadow-sm border border-gray-200 col-span-1">
+        <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-6 border-b border-gray-100 pb-2">Overall Assessment</h3>
         <div className="flex flex-col items-center justify-center">
           {isPpeUnknown ? (
-            <div className="flex flex-col items-center justify-center w-32 h-32 rounded-full border-4 border-cyan-500/30 bg-black/40 mb-4 p-4 text-center shadow-[inset_0_0_20px_rgba(6,182,212,0.2)]">
-              <span className="text-[10px] font-bold text-cyan-200/80 uppercase leading-tight tracking-widest">PPE Analysis<br/>Unavailable</span>
+            <div className="flex flex-col items-center justify-center w-32 h-32 rounded-full border-4 border-gray-200 bg-gray-50 mb-4 p-4 text-center">
+              <span className="text-[10px] font-bold text-gray-400 uppercase leading-tight">PPE Analysis<br/>Unavailable</span>
             </div>
           ) : (
             <div className="relative flex items-center justify-center w-32 h-32 rounded-full border-8 border-gray-100 mb-4">
@@ -35,15 +35,15 @@ export const InspectionDashboard: React.FC<InspectionDashboardProps> = ({ data }
             </div>
           )}
           
-          <div className={`px-4 py-1.5 rounded-md text-xs font-bold uppercase tracking-widest border ${
-            isPpeUnknown ? 'bg-white/10 text-cyan-100 border-white/20' :
-            data.status === 'compliant' ? 'bg-green-500/20 text-green-300 border-green-500/50' : 'bg-red-500/20 text-red-300 border-red-500/50 shadow-[0_0_15px_rgba(239,68,68,0.3)]'
+          <div className={`px-4 py-1.5 rounded-sm text-xs font-bold uppercase tracking-wider ${
+            isPpeUnknown ? 'bg-gray-100 text-gray-600' :
+            data.status === 'compliant' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
           }`}>
             {isPpeUnknown ? 'Analysis Incomplete' : data.status === 'compliant' ? 'Compliant' : 'Needs Attention'}
           </div>
 
           {isPpeUnknown && (
-            <p className="mt-4 text-xs text-blue-100/60 text-center px-2 font-light">
+            <p className="mt-4 text-xs text-gray-500 text-center px-2">
               Current model detects people but is not trained for construction PPE analysis.
             </p>
           )}
@@ -51,40 +51,38 @@ export const InspectionDashboard: React.FC<InspectionDashboardProps> = ({ data }
       </div>
 
       {/* Summary Stats */}
-      <div className="glass-panel p-6 col-span-1 border border-white/20">
-        <h3 className="text-sm font-bold text-white uppercase tracking-widest mb-6 border-b border-white/10 pb-2">Detection Summary</h3>
+      <div className="bg-white p-6 rounded-none shadow-sm border border-gray-200 col-span-1">
+        <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-6 border-b border-gray-100 pb-2">Detection Summary</h3>
         <div className="space-y-4">
-          <div className="flex justify-between items-center pb-3 border-b border-white/5">
-            <span className="text-blue-100/80 font-medium">Workers</span>
-            <span className="font-bold text-white bg-black/30 px-3 py-1 rounded-md border border-white/10">{data.summary.workers_detected}</span>
+          <div className="flex justify-between items-center pb-3 border-b border-gray-50">
+            <span className="text-gray-600 font-medium">Workers</span>
+            <span className="font-bold text-gray-900">{data.summary.workers_detected}</span>
           </div>
           
-          <div className="flex justify-between items-center pb-3 border-b border-white/5">
-            <span className="text-blue-100/80 font-medium">PPE Status</span>
-            <span className="font-bold text-white">
+          <div className="flex justify-between items-center pb-3 border-b border-gray-50">
+            <span className="text-gray-600 font-medium">PPE Status</span>
+            <span className="font-bold text-gray-900">
               {isPpeUnknown ? (
-                <span className="text-cyan-200/50 text-[10px] uppercase tracking-widest bg-black/40 border border-white/10 px-2 py-1 rounded-md">Unavailable</span>
+                <span className="text-gray-400 text-xs uppercase bg-gray-100 px-2 py-1 rounded-sm">Unavailable</span>
               ) : (
-                <span className="bg-black/30 px-3 py-1 rounded-md border border-white/10">{data.summary.ppe_compliant}</span>
+                data.summary.ppe_compliant
               )}
             </span>
           </div>
           
-          <div className="flex justify-between items-center pb-3 border-b border-white/5">
-            <span className="text-blue-100/80 font-medium">Hazards</span>
-            <span className={`font-bold px-3 py-1 rounded-md border ${data.summary.hazards_detected > 0 ? 'bg-red-500/20 text-red-300 border-red-500/50' : 'bg-black/30 text-white border-white/10'}`}>
-              {data.summary.hazards_detected}
-            </span>
+          <div className="flex justify-between items-center pb-3 border-b border-gray-50">
+            <span className="text-gray-600 font-medium">Hazards</span>
+            <span className="font-bold text-gray-900">{data.summary.hazards_detected}</span>
           </div>
           
-          <div className="flex justify-between items-center pb-3 border-b border-white/5">
-            <span className="text-blue-100/80 font-medium">Equipment</span>
-            <span className="font-bold text-white bg-black/30 px-3 py-1 rounded-md border border-white/10">{data.summary.equipment_detected}</span>
+          <div className="flex justify-between items-center pb-3 border-b border-gray-50">
+            <span className="text-gray-600 font-medium">Equipment</span>
+            <span className="font-bold text-gray-900">{data.summary.equipment_detected}</span>
           </div>
 
-          <div className="mt-6 pt-4 border-t border-white/10">
-            <h4 className="text-[10px] font-bold text-cyan-200/60 uppercase tracking-widest mb-3">PPE Model Capabilities (Pending)</h4>
-            <div className="grid grid-cols-2 gap-2 text-xs text-blue-100/40">
+          <div className="mt-6 pt-4 border-t border-gray-100">
+            <h4 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">PPE Model Capabilities (Pending Integration)</h4>
+            <div className="grid grid-cols-2 gap-2 text-xs text-gray-400 opacity-60">
               <div className="flex justify-between"><span>Helmet</span><span>-</span></div>
               <div className="flex justify-between"><span>Vest</span><span>-</span></div>
               <div className="flex justify-between"><span>Gloves</span><span>-</span></div>
@@ -96,42 +94,42 @@ export const InspectionDashboard: React.FC<InspectionDashboardProps> = ({ data }
       </div>
 
       {/* Observations / Violations */}
-      <div className="glass-panel p-6 col-span-1 md:col-span-1 overflow-y-auto max-h-[400px] border border-white/20 custom-scrollbar">
-        <h3 className="text-sm font-bold text-white uppercase tracking-widest mb-6 border-b border-white/10 pb-2">Safety Observations</h3>
+      <div className="bg-white p-6 rounded-none shadow-sm border border-gray-200 col-span-1 md:col-span-1 overflow-y-auto max-h-[400px]">
+        <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-6 border-b border-gray-100 pb-2">Safety Observations</h3>
         {data.violations.length === 0 ? (
-          <div className="text-center py-8 text-blue-100/50 bg-black/20 rounded-xl border border-dashed border-white/20">
-            <ShieldAlert className="w-8 h-8 mx-auto mb-2 opacity-50" />
-            <p className="text-sm font-medium tracking-wide">No observations recorded.</p>
+          <div className="text-center py-8 text-gray-400 border-2 border-dashed border-gray-100">
+            <ShieldAlert className="w-8 h-8 mx-auto mb-2 opacity-20" />
+            <p className="text-sm font-medium">No observations recorded.</p>
           </div>
         ) : (
           <div className="space-y-3">
             {data.violations.map((violation, idx) => (
-              <div key={idx} className={`p-4 rounded-lg bg-black/40 border backdrop-blur-sm transition-all duration-300 hover:bg-black/60 hover:shadow-lg ${
-                violation.severity === 'high' ? 'border-red-500/50 shadow-[0_0_15px_rgba(239,68,68,0.15)]' :
-                violation.severity === 'medium' ? 'border-amber-500/50' :
-                violation.severity === 'info' ? 'border-blue-500/50' :
-                'border-white/10'
+              <div key={idx} className={`p-3 border-l-4 rounded-r-sm bg-white border-y border-r border-y-gray-100 border-r-gray-100 shadow-sm ${
+                violation.severity === 'high' ? 'border-l-red-600' :
+                violation.severity === 'medium' ? 'border-l-amber-500' :
+                violation.severity === 'info' ? 'border-l-blue-500' :
+                'border-l-gray-400'
               }`}>
-                <div className="flex items-start gap-3">
-                  <div className="mt-0.5 p-1.5 rounded-md bg-black/50">
-                    {violation.severity === 'high' && <AlertTriangle className="w-4 h-4 text-red-400" />}
-                    {violation.severity === 'medium' && <AlertTriangle className="w-4 h-4 text-amber-400" />}
-                    {violation.severity === 'info' && <Info className="w-4 h-4 text-blue-400" />}
-                    {violation.severity === 'low' && <Info className="w-4 h-4 text-gray-400" />}
+                <div className="flex items-start gap-2">
+                  <div className="mt-0.5">
+                    {violation.severity === 'high' && <AlertTriangle className="w-4 h-4 text-red-600" />}
+                    {violation.severity === 'medium' && <AlertTriangle className="w-4 h-4 text-amber-500" />}
+                    {violation.severity === 'info' && <Info className="w-4 h-4 text-blue-500" />}
+                    {violation.severity === 'low' && <Info className="w-4 h-4 text-gray-500" />}
                   </div>
                   <div>
-                    <div className="flex items-center gap-2 mb-1.5">
-                      <span className={`text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-sm border ${
-                        violation.severity === 'high' ? 'bg-red-500/20 text-red-300 border-red-500/50' :
-                        violation.severity === 'medium' ? 'bg-amber-500/20 text-amber-300 border-amber-500/50' :
-                        violation.severity === 'info' ? 'bg-blue-500/20 text-blue-300 border-blue-500/50' :
-                        'bg-white/10 text-gray-300 border-white/20'
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className={`text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-sm ${
+                        violation.severity === 'high' ? 'bg-red-100 text-red-800' :
+                        violation.severity === 'medium' ? 'bg-amber-100 text-amber-800' :
+                        violation.severity === 'info' ? 'bg-blue-100 text-blue-800' :
+                        'bg-gray-100 text-gray-800'
                       }`}>
                         {violation.severity === 'high' ? 'Critical' : violation.severity === 'medium' ? 'Warning' : 'Info'}
                       </span>
-                      <h4 className="text-xs font-bold text-white uppercase tracking-wider truncate">{violation.type.replace(/_/g, ' ')}</h4>
+                      <h4 className="text-xs font-bold text-gray-900 uppercase truncate">{violation.type.replace(/_/g, ' ')}</h4>
                     </div>
-                    <p className="text-xs text-blue-100/70 leading-relaxed font-light">{violation.description}</p>
+                    <p className="text-xs text-gray-600 leading-relaxed">{violation.description}</p>
                   </div>
                 </div>
               </div>
