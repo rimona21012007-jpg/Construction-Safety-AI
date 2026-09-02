@@ -37,12 +37,12 @@ function App() {
   return (
     <div className="min-h-screen bg-slate-50 relative flex flex-col items-center p-8 overflow-hidden">
       <div className="absolute inset-0 z-0">
-        <GradientWave colors={["#e0f2fe", "#f0fdfa", "#e0f2fe", "#ffffff", "#f0fdfa", "#ffffff"]} />
+        <GradientWave colors={["#bfdbfe", "#dbeafe", "#e0f2fe", "#eff6ff", "#dbeafe", "#bfdbfe"]} />
       </div>
       
       <div className="z-10 w-full max-w-5xl flex flex-col items-center">
       {/* Header */}
-      <header className="w-full mb-12 bg-white/90 backdrop-blur-md border border-gray-200 shadow-sm rounded-2xl">
+      <header className="w-full mb-12 bg-white/40 backdrop-blur-xl border border-white/60 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] rounded-2xl">
         <div className="px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="relative flex items-center justify-center">
@@ -81,20 +81,20 @@ function App() {
               </p>
             
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-                <div className="bg-white p-6 text-center group hover:-translate-y-1 shadow-sm border border-gray-200 rounded-xl">
-                  <div className="text-4xl font-black text-gray-100 mb-4 group-hover:text-blue-100 transition-colors duration-500">01</div>
-                  <h3 className="font-bold text-gray-900 mb-2 tracking-wide">Upload</h3>
-                  <p className="text-sm text-gray-500 font-light">Securely upload high-resolution construction site imagery.</p>
+                <div className="bg-white/40 backdrop-blur-lg border border-white/60 p-8 text-center group hover:-translate-y-2 hover:bg-white/60 shadow-[0_8px_32px_0_rgba(31,38,135,0.05)] hover:shadow-[0_16px_48px_0_rgba(31,38,135,0.1)] transition-all duration-500 rounded-2xl">
+                  <div className="text-5xl font-black text-gray-200/50 mb-6 group-hover:text-blue-500/20 transition-colors duration-500">01</div>
+                  <h3 className="font-bold text-gray-900 mb-3 tracking-wide text-lg">Upload</h3>
+                  <p className="text-sm text-gray-600 font-medium leading-relaxed">Securely upload high-resolution construction site imagery.</p>
                 </div>
-                <div className="bg-white p-6 text-center group hover:-translate-y-1 delay-75 shadow-sm border border-gray-200 rounded-xl">
-                  <div className="text-4xl font-black text-gray-100 mb-4 group-hover:text-blue-100 transition-colors duration-500">02</div>
-                  <h3 className="font-bold text-gray-900 mb-2 tracking-wide">Analyze</h3>
-                  <p className="text-sm text-gray-500 font-light">Computer vision models instantly process the visual data.</p>
+                <div className="bg-white/40 backdrop-blur-lg border border-white/60 p-8 text-center group hover:-translate-y-2 hover:bg-white/60 delay-75 shadow-[0_8px_32px_0_rgba(31,38,135,0.05)] hover:shadow-[0_16px_48px_0_rgba(31,38,135,0.1)] transition-all duration-500 rounded-2xl">
+                  <div className="text-5xl font-black text-gray-200/50 mb-6 group-hover:text-blue-500/20 transition-colors duration-500">02</div>
+                  <h3 className="font-bold text-gray-900 mb-3 tracking-wide text-lg">Analyze</h3>
+                  <p className="text-sm text-gray-600 font-medium leading-relaxed">Computer vision models instantly process the visual data.</p>
                 </div>
-                <div className="bg-white p-6 text-center group hover:-translate-y-1 delay-150 shadow-sm border border-gray-200 rounded-xl">
-                  <div className="text-4xl font-black text-gray-100 mb-4 group-hover:text-blue-100 transition-colors duration-500">03</div>
-                  <h3 className="font-bold text-gray-900 mb-2 tracking-wide">Review</h3>
-                  <p className="text-sm text-gray-500 font-light">Examine the AI-assisted safety observations and bounding boxes.</p>
+                <div className="bg-white/40 backdrop-blur-lg border border-white/60 p-8 text-center group hover:-translate-y-2 hover:bg-white/60 delay-150 shadow-[0_8px_32px_0_rgba(31,38,135,0.05)] hover:shadow-[0_16px_48px_0_rgba(31,38,135,0.1)] transition-all duration-500 rounded-2xl">
+                  <div className="text-5xl font-black text-gray-200/50 mb-6 group-hover:text-blue-500/20 transition-colors duration-500">03</div>
+                  <h3 className="font-bold text-gray-900 mb-3 tracking-wide text-lg">Review</h3>
+                  <p className="text-sm text-gray-600 font-medium leading-relaxed">Examine the AI-assisted safety observations and bounding boxes.</p>
                 </div>
               </div>
               
