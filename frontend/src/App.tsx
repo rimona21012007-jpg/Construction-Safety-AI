@@ -35,15 +35,15 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 relative flex flex-col items-center p-8 overflow-hidden">
+    <div className="min-h-screen bg-slate-50 relative flex flex-col items-center p-4 sm:p-8 overflow-hidden">
       <div className="absolute inset-0 z-0">
-        <GradientWave colors={["#38bdf8", "#0ea5e9", "#7dd3fc", "#0284c7", "#38bdf8", "#7dd3fc"]} />
+        <GradientWave colors={["#ffffff", "#f0f9ff", "#e0f2fe", "#bae6fd", "#ffffff", "#f0f9ff"]} />
       </div>
       
       <div className="z-10 w-full max-w-5xl flex flex-col items-center">
       {/* Header */}
-      <header className="w-full mb-12 bg-white shadow-md border border-gray-100 rounded-2xl">
-        <div className="px-8 h-16 flex items-center justify-between">
+      <header className="w-full mb-12 bg-white/90 backdrop-blur-md shadow-sm border border-white/60 rounded-2xl">
+        <div className="px-4 sm:px-8 py-4 sm:py-0 sm:h-16 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-0">
           <div className="flex items-center gap-3">
             <div className="relative flex items-center justify-center">
               <Hexagon className="w-10 h-10 text-blue-600 opacity-90" strokeWidth={1.5} />
@@ -187,7 +187,7 @@ function App() {
                 </div>
               </div>
 
-              <div className="bg-white border border-gray-200 p-4 shadow-sm rounded-xl text-center mb-8 print:bg-white print:border-black print:shadow-none">
+              <div className="bg-white border border-gray-200 p-4 shadow-sm rounded-xl text-center mb-8 print:break-before-page print:bg-white print:border-black print:shadow-none">
                 <div className="flex justify-between items-center mb-4 print:hidden">
                   <h3 className="font-bold text-gray-900 uppercase tracking-widest text-sm">Visual Evidence</h3>
                   <div className="flex bg-gray-100 p-1 rounded-md border border-gray-200">

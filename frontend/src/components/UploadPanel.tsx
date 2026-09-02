@@ -42,7 +42,7 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({ onAnalyze, isLoading }
       >
         {previewUrl ? (
           <div className="relative">
-            <img src={previewUrl} alt="Preview" className="max-h-64 mx-auto rounded-lg shadow-lg ring-1 ring-black/5" />
+            <img src={previewUrl} alt="Preview" className="max-h-64 mx-auto rounded-lg shadow-xl border border-gray-800" />
             <div className="mt-6 flex justify-center gap-4">
               <button 
                 onClick={() => {
