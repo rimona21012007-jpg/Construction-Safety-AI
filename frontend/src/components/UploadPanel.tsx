@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { UploadCloud, Image as ImageIcon } from 'lucide-react';
+import { UploadCloud } from 'lucide-react';
 
 interface UploadPanelProps {
   onAnalyze: (file: File) => void;

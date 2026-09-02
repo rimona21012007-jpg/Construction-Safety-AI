@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { HardHat, Activity, ShieldCheck, Box } from 'lucide-react';
 import { UploadPanel } from './components/UploadPanel';
 import { DetectionOverlay } from './components/DetectionOverlay';
 import { InspectionDashboard } from './components/InspectionDashboard';
 import { inspectImage, getModelInfo } from './services/api';
-import { InspectionResponse } from './types';
+import type { InspectionResponse } from './types';
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);

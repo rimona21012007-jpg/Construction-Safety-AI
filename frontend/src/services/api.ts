@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { InspectionResponse } from '../types';
+import type { InspectionResponse } from '../types';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 

@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { Detection } from '../types';
+import type { Detection } from '../types';
 
 interface DetectionOverlayProps {
   imageUrl: string;

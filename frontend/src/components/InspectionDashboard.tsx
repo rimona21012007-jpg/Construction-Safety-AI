@@ -1,6 +1,6 @@
 import React from 'react';
-import { InspectionResponse } from '../types';
-import { ShieldAlert, AlertTriangle, HardHat, Info } from 'lucide-react';
+import type { InspectionResponse } from '../types';
+import { ShieldAlert, AlertTriangle, Info } from 'lucide-react';
 
 interface InspectionDashboardProps {
   data: InspectionResponse;
