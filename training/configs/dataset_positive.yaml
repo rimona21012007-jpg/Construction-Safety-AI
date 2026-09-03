@@ -1,0 +1,12 @@
+path: ../datasets/construction_safety_positive
+train: images/train
+val: images/val
+test: images/test
+
+names:
+  0: Person
+  1: helmet
+  2: vest
+  3: boots
+  4: gloves
+  5: goggles

@@ -5,7 +5,6 @@ import { DetectionOverlay } from './components/DetectionOverlay';
 import { InspectionDashboard } from './components/InspectionDashboard';
 import { inspectImage, getModelInfo } from './services/api';
 import type { InspectionResponse } from './types';
-import { GradientWave } from "./components/ui/gradient-wave";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
@@ -35,14 +34,10 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 relative flex flex-col items-center p-4 sm:p-8 overflow-hidden">
-      <div className="absolute inset-0 z-0">
-        <GradientWave colors={["#ffffff", "#f0f9ff", "#e0f2fe", "#bae6fd", "#ffffff", "#f0f9ff"]} />
-      </div>
-      
-      <div className="z-10 w-full max-w-5xl flex flex-col items-center">
+    <div className="min-h-screen bg-gray-50 flex flex-col items-center p-4 sm:p-8">
+      <div className="w-full max-w-5xl flex flex-col items-center">
       {/* Header */}
-      <header className="w-full mb-12 bg-white/90 backdrop-blur-md shadow-sm border border-white/60 rounded-2xl">
+      <header className="w-full mb-8 bg-white shadow-sm border border-gray-200 rounded-none">
         <div className="px-4 sm:px-8 py-4 sm:py-0 sm:h-16 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-0">
           <div className="flex items-center gap-3">
             <div className="relative flex items-center justify-center">
@@ -167,14 +162,14 @@ function App() {
                   </div>
                 </div>
                 
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-sm">
                   <div>
                     <span className="block text-gray-400 text-xs uppercase tracking-widest font-bold mb-1 print:text-gray-500">Date / Time</span>
                     <span className="font-mono text-gray-900 print:text-black">{new Date().toLocaleString()}</span>
                   </div>
                   <div>
                     <span className="block text-gray-400 text-xs uppercase tracking-widest font-bold mb-1 print:text-gray-500">Status</span>
-                    <span className={`font-mono font-bold ${result.status === 'compliant' ? 'text-green-600' : (result.status === 'inconclusive' ? 'text-gray-500' : 'text-red-600')} print:text-black`}>{result.status.toUpperCase()}</span>
+                    <span className={`font-mono font-bold ${result.status.toUpperCase() === 'COMPLIANT' ? 'text-green-600' : (result.status.toUpperCase() === 'INCONCLUSIVE' ? 'text-gray-500' : 'text-red-600')} print:text-black`}>{result.status.toUpperCase()}</span>
                   </div>
                   <div>
                     <span className="block text-gray-400 text-xs uppercase tracking-widest font-bold mb-1 print:text-gray-500">Processing Time</span>
@@ -183,6 +178,10 @@ function App() {
                   <div>
                     <span className="block text-gray-400 text-xs uppercase tracking-widest font-bold mb-1 print:text-gray-500">Model Version</span>
                     <span className="font-mono text-gray-900 print:text-black">{result.model}</span>
+                  </div>
+                  <div>
+                    <span className="block text-gray-400 text-xs uppercase tracking-widest font-bold mb-1 print:text-gray-500">Confidence</span>
+                    <span className="font-mono text-gray-900 print:text-black">{result.confidence_threshold}</span>
                   </div>
                 </div>
               </div>
@@ -207,8 +206,8 @@ function App() {
                 </div>
                 
                 <DetectionOverlay 
-                  imageUrl={imageUrl} 
-                  detections={result.detections} 
+                  originalImageUrl={imageUrl} 
+                  annotatedImageBase64={result.annotated_image_base64} 
                   showDetections={showDetections} 
                 />
               </div>

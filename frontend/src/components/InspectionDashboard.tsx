@@ -1,6 +1,6 @@
 import React from 'react';
 import type { InspectionResponse } from '../types';
-import { ShieldAlert, AlertTriangle, Info, CheckCircle2, UserCircle2 } from 'lucide-react';
+import { ShieldAlert, AlertTriangle, Info, CheckCircle2, UserCircle2, HelpCircle } from 'lucide-react';
 
 interface InspectionDashboardProps {
   data: InspectionResponse;
@@ -9,93 +9,73 @@ interface InspectionDashboardProps {
 export const InspectionDashboard: React.FC<InspectionDashboardProps> = ({ data }) => {
   const isPpeUnknown = data.violations.some(v => v.type === 'ppe_unknown');
 
+  const renderStatusTag = (status: string) => {
+    if (status === 'COMPLIANT' || status === 'compliant') {
+      return <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-bold uppercase">COMPLIANT</span>;
+    }
+    if (status === 'VIOLATION') {
+      return <span className="bg-red-100 text-red-800 px-2 py-1 rounded text-xs font-bold uppercase">VIOLATION</span>;
+    }
+    if (status === 'UNKNOWN') {
+      return <span className="bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs font-bold uppercase">UNKNOWN</span>;
+    }
+    if (status === 'INCONCLUSIVE' || status === 'inconclusive') {
+      return <span className="bg-amber-100 text-amber-800 px-2 py-1 rounded text-xs font-bold uppercase">INCONCLUSIVE</span>;
+    }
+    return <span className="bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs font-bold uppercase">{status}</span>;
+  };
+
   const renderPpeIcon = (status: "COMPLIANT" | "VIOLATION" | "UNKNOWN") => {
-    if (status === "COMPLIANT") return <CheckCircle2 className="w-4 h-4 text-green-500 mx-auto" />;
-    if (status === "VIOLATION") return <AlertTriangle className="w-4 h-4 text-red-500 mx-auto" />;
-    return <span className="text-xs text-gray-300 font-bold">-</span>;
+    if (status === "COMPLIANT") return <CheckCircle2 className="w-4 h-4 text-green-600" />;
+    if (status === "VIOLATION") return <AlertTriangle className="w-4 h-4 text-red-600" />;
+    return <HelpCircle className="w-4 h-4 text-gray-400" />;
   };
 
   return (
     <div className="flex flex-col gap-6 mt-8">
+      {/* Summary Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Safety Score Card */}
-        <div className="bg-white p-6 rounded-none shadow-sm border border-gray-200 col-span-1">
-          <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-6 border-b border-gray-100 pb-2">Overall Assessment</h3>
-          <div className="flex flex-col items-center justify-center">
-            {isPpeUnknown || data.safety_score === null ? (
-              <div className="flex flex-col items-center justify-center w-32 h-32 rounded-full border-4 border-gray-200 bg-gray-50 mb-4 p-4 text-center">
-                <span className="text-[10px] font-bold text-gray-400 uppercase leading-tight">PPE Analysis<br/>Unavailable</span>
-              </div>
-            ) : (
-              <div className="relative flex items-center justify-center w-32 h-32 rounded-full border-8 border-gray-100 mb-4">
-                <svg className="absolute top-0 left-0 w-full h-full transform -rotate-90">
-                  <circle
-                    cx="64" cy="64" r="56"
-                    fill="transparent" stroke={data.safety_score >= 80 ? '#10B981' : data.safety_score >= 50 ? '#F59E0B' : '#EF4444'}
-                    strokeWidth="8"
-                    strokeDasharray={`${(data.safety_score / 100) * 351} 351`}
-                    className="transition-all duration-1000 ease-out"
-                  />
-                </svg>
-                <div className="text-4xl font-bold text-gray-900">{data.safety_score}</div>
-              </div>
-            )}
-            
-            <div className={`px-4 py-1.5 rounded-sm text-xs font-bold uppercase tracking-wider ${
-              data.status === 'inconclusive' ? 'bg-gray-100 text-gray-600' :
-              data.status === 'compliant' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-            }`}>
-              {data.status === 'inconclusive' ? 'Analysis Incomplete' : data.status === 'compliant' ? 'Compliant' : 'Needs Attention'}
-            </div>
-
-            {isPpeUnknown && (
-              <p className="mt-4 text-xs text-gray-500 text-center px-2">
-                Current model detects people but is not trained for construction PPE analysis.
-              </p>
-            )}
-          </div>
-        </div>
-
-        {/* Summary Stats */}
-        <div className="bg-white p-6 rounded-none shadow-sm border border-gray-200 col-span-1">
+        <div className="bg-white p-6 rounded-none shadow-sm border border-gray-200 col-span-1 md:col-span-2">
           <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-6 border-b border-gray-100 pb-2">Detection Summary</h3>
-          <div className="space-y-4">
-            <div className="flex justify-between items-center pb-3 border-b border-gray-50">
-              <span className="text-gray-600 font-medium">Workers</span>
-              <span className="font-bold text-gray-900">{data.summary.workers_detected}</span>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="flex flex-col pb-3 border-b border-gray-50">
+              <span className="text-gray-500 text-xs uppercase tracking-wider font-bold mb-1">Workers Detected</span>
+              <span className="font-bold text-gray-900 text-xl">{data.summary.workers_detected}</span>
             </div>
             
-            <div className="flex justify-between items-center pb-3 border-b border-gray-50">
-              <span className="text-gray-600 font-medium">PPE Compliant</span>
-              <span className="font-bold text-green-600">
+            <div className="flex flex-col pb-3 border-b border-gray-50">
+              <span className="text-gray-500 text-xs uppercase tracking-wider font-bold mb-1">PPE Compliant</span>
+              <span className="font-bold text-green-600 text-xl">
                 {isPpeUnknown ? (
-                  <span className="text-gray-400 text-xs uppercase bg-gray-100 px-2 py-1 rounded-sm">Unavailable</span>
+                  <span className="text-gray-400 text-sm">Unavailable</span>
                 ) : (
                   data.summary.ppe_compliant
                 )}
               </span>
             </div>
             
-            <div className="flex justify-between items-center pb-3 border-b border-gray-50">
-              <span className="text-gray-600 font-medium">PPE Violations</span>
-              <span className="font-bold text-red-600">
+            <div className="flex flex-col pb-3 border-b border-gray-50">
+              <span className="text-gray-500 text-xs uppercase tracking-wider font-bold mb-1">PPE Violations</span>
+              <span className="font-bold text-red-600 text-xl">
                 {isPpeUnknown ? (
-                  <span className="text-gray-400 text-xs uppercase bg-gray-100 px-2 py-1 rounded-sm">Unavailable</span>
+                  <span className="text-gray-400 text-sm">Unavailable</span>
                 ) : (
                   data.summary.ppe_violations
                 )}
               </span>
             </div>
             
-            <div className="flex justify-between items-center pb-3 border-b border-gray-50">
-              <span className="text-gray-600 font-medium">Equipment</span>
-              <span className="font-bold text-gray-900">{data.summary.equipment_detected}</span>
+            <div className="flex flex-col pb-3 border-b border-gray-50">
+              <span className="text-gray-500 text-xs uppercase tracking-wider font-bold mb-1">Equipment</span>
+              <span className="font-bold text-gray-900 text-xl">
+                {Object.values(data.equipment_detected || {}).reduce((a, b) => a + b, 0)}
+              </span>
             </div>
           </div>
         </div>
 
-        {/* Observations / Violations */}
-        <div className="bg-white p-6 rounded-none shadow-sm border border-gray-200 col-span-1 md:col-span-1 overflow-y-auto max-h-[400px]">
+        {/* Observations / Violations List */}
+        <div className="bg-white p-6 rounded-none shadow-sm border border-gray-200 col-span-1 overflow-y-auto max-h-[400px]">
           <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-6 border-b border-gray-100 pb-2">Safety Observations</h3>
           {data.violations.length === 0 ? (
             <div className="text-center py-8 text-gray-400 border-2 border-dashed border-gray-100">
@@ -140,58 +120,53 @@ export const InspectionDashboard: React.FC<InspectionDashboardProps> = ({ data }
         </div>
       </div>
 
-      {/* Worker PPE Status Table */}
+      {/* Legend */}
+      <div className="bg-gray-50 border border-gray-200 p-4 rounded-sm mb-2 text-xs flex flex-wrap gap-4 items-center print:hidden">
+        <span className="font-bold uppercase tracking-wider text-gray-700 mr-2">Legend:</span>
+        <div className="flex items-center gap-1"><CheckCircle2 className="w-4 h-4 text-green-600" /> <span className="text-gray-600">COMPLIANT (Sufficient positive evidence)</span></div>
+        <div className="flex items-center gap-1"><AlertTriangle className="w-4 h-4 text-red-600" /> <span className="text-gray-600">VIOLATION (Sufficient evidence of missing PPE)</span></div>
+        <div className="flex items-center gap-1"><HelpCircle className="w-4 h-4 text-gray-400" /> <span className="text-gray-600">UNKNOWN (Insufficient visual evidence)</span></div>
+      </div>
+
+      {/* Worker PPE Status Cards */}
       {data.workers && data.workers.length > 0 && !isPpeUnknown && (
-        <div className="bg-white p-6 rounded-none shadow-sm border border-gray-200">
-          <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-6 border-b border-gray-100 pb-2">
-            Per-Worker PPE Status
-          </h3>
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="bg-gray-50 border-y border-gray-200 text-xs uppercase tracking-widest text-gray-500">
-                  <th className="p-4 font-bold">Worker</th>
-                  <th className="p-4 font-bold text-center">Hard Hat</th>
-                  <th className="p-4 font-bold text-center">Safety Vest</th>
-                  <th className="p-4 font-bold text-center">Gloves</th>
-                  <th className="p-4 font-bold text-center">Boots</th>
-                  <th className="p-4 font-bold text-center">Goggles</th>
-                  <th className="p-4 font-bold text-center">Score</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-100 text-sm">
-                {data.workers.map((worker) => (
-                  <tr key={worker.id} className="hover:bg-gray-50 transition-colors">
-                    <td className="p-4">
-                      <div className="flex items-center gap-3">
-                        <UserCircle2 className="w-8 h-8 text-blue-500/50" />
-                        <div>
-                          <p className="font-bold text-gray-900">{worker.id}</p>
-                          <p className="text-xs text-gray-500">Conf: {(worker.confidence * 100).toFixed(0)}%</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="p-4 text-center">{renderPpeIcon(worker.ppe.helmet.status)}</td>
-                    <td className="p-4 text-center">{renderPpeIcon(worker.ppe.vest.status)}</td>
-                    <td className="p-4 text-center">{renderPpeIcon(worker.ppe.gloves.status)}</td>
-                    <td className="p-4 text-center">{renderPpeIcon(worker.ppe.boots.status)}</td>
-                    <td className="p-4 text-center">{renderPpeIcon(worker.ppe.goggles.status)}</td>
-                    <td className="p-4 text-center">
-                      {worker.score !== null ? (
-                        <span className={`px-2 py-1 rounded-sm text-xs font-bold ${
-                          worker.score === 100 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {data.workers.map((worker) => (
+            <div key={worker.worker_id} className="bg-white p-5 rounded-none shadow-sm border border-gray-200 flex flex-col">
+              <div className="flex justify-between items-center mb-4 pb-4 border-b border-gray-100">
+                <div className="flex items-center gap-3">
+                  <UserCircle2 className="w-8 h-8 text-blue-500/50" />
+                  <div>
+                    <h4 className="font-bold text-gray-900 text-lg uppercase tracking-wide">Worker {worker.worker_id.toString().padStart(2, '0')}</h4>
+                    <span className="text-xs text-gray-500 uppercase tracking-widest">Confidence: {(worker.worker_confidence * 100).toFixed(0)}%</span>
+                  </div>
+                </div>
+                <div>
+                  {renderStatusTag(worker.overall_status)}
+                </div>
+              </div>
+              
+              <div className="flex flex-col gap-3">
+                {Object.entries(worker.ppe).map(([ppeType, ppeData]) => (
+                  <div key={ppeType} className="flex flex-col p-3 bg-gray-50 border border-gray-100 rounded-sm">
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="font-bold text-gray-800 uppercase tracking-wider text-xs w-20">{ppeType}</span>
+                      <div className="flex items-center gap-2">
+                        <span className={`text-[10px] font-bold uppercase tracking-wider ${
+                          ppeData.status === 'COMPLIANT' ? 'text-green-700' : 
+                          ppeData.status === 'VIOLATION' ? 'text-red-700' : 'text-gray-500'
                         }`}>
-                          {worker.score}
+                          {ppeData.status}
                         </span>
-                      ) : (
-                        <span className="text-gray-400 text-xs italic">N/A</span>
-                      )}
-                    </td>
-                  </tr>
+                        {renderPpeIcon(ppeData.status)}
+                      </div>
+                    </div>
+                    <span className="text-xs text-gray-600 mt-1 pl-0">↳ {ppeData.evidence}</span>
+                  </div>
                 ))}
-              </tbody>
-            </table>
-          </div>
+              </div>
+            </div>
+          ))}
         </div>
       )}
     </div>

@@ -3,9 +3,10 @@ import type { InspectionResponse } from '../types';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8002';
 
-export const inspectImage = async (file: File): Promise<InspectionResponse> => {
+export const inspectImage = async (file: File, confidenceThreshold: number = 0.25): Promise<InspectionResponse> => {
   const formData = new FormData();
   formData.append('file', file);
+  formData.append('confidence_threshold', confidenceThreshold.toString());
 
   const response = await axios.post(`${API_URL}/api/inspect`, formData, {
     headers: {

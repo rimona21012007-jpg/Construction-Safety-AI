@@ -4,11 +4,11 @@ val: images/val
 test: images/test
 
 names:
-  0: helmet
-  1: gloves
-  2: vest
-  3: boots
-  4: goggles
-  5: Person
-  6: no_helmet
-  7: no_gloves
+  0: Person
+  1: helmet
+  2: no_helmet
+  3: vest
+  4: boots
+  5: gloves
+  6: no_gloves
+  7: goggles
